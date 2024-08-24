@@ -1,35 +1,36 @@
 <template>
-  <div>{{ count }}</div>
-  <h1>Vue.js 라이플사이클 테스트</h1>
+  <div>{{ rawHtml }}</div>
+  <div>{{ rawHtml2 }}</div>
+  <div v-html="rawHtml2"></div>
+
+  <!-- 클래스 명시 방법 -->
+  <h2 v-bind:class = "{active: isActive}">클래스 바인딩 테스트입니다.</h2>
+  <!-- 클래스 명시 방법 축약형 -->
+  <h2 :class="{ active: isActive }">클래스 바인딩 테스트입니다.</h2>
+
+  <button @click="change">버튼</button>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      count: 0,
+      rawHtml: '이것은 텍스트 문구입니다.',
+      rawHtml2: '<span style="color: red">이것은 빨간색이어야 합니다</span>',
+      isActive: false,
+      
     }
-  },
-  beforeCreate() {
-    console.log("LifeCycle is beforeCreate", this.count)
-  },
-  created() {
-    console.log("LifeCycle is created", this.count)
-  },
-  beforeMount() {
-    console.log("LifeCycle is beforeMount", document.querySelector('h1'))
-  },
-  mounted() {
-    console.log("LifeCycle is mounted", document.querySelector('h1'))
   },
   methods: {
-    test() {
-      console.log("테스트 함수 호출")
-    }
+    change() {
+      this.isActive = !this.isActive
+    },
   }
 }
 </script>
 
-<style lang="scss" scoped>
-
+<style scoped>
+h2.active {
+  color: green;
+}
 </style>
